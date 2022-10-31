@@ -25,13 +25,17 @@ function boringFunction() {
 
     function mooFunction() {
 
+        document.getElementById("textbox").value = document.getElementById("textbox").value.toUpperCase();
+
         var str = document.getElementById("textbox").value;
         var parts = str.split(".");  // ["How", "are", "you?"]
-        str = parts.join("moo.");       // "How_are_you?"
+        str = parts.join("-Moo.");       // "How_are_you?"
 
-
-        document.getElementById("textbox").value = document.getElementById("textbox").value.toUpperCase();
         document.getElementById("textbox").value = str;
+
+
+       
+      
         
      }
 
