@@ -2,14 +2,28 @@
 
    //Set up server
 
-  // $servername = "localhost";
-  //$username = "urcyphloccxygf";
-  //$password = "password";
-  // $dbname = "mydatabase";
-
-  $db = pg_connect("host=ec2-3-92-98-129.compute-1.amazonaws.com port=5432 dbname=d2kcc4it2iou00 user=urcyphloccxygf password=16e062b8cc6601f501d1b62aee13c758540331c093d7074f424bc687b6bf5351");
+  $host = "ec2-3-92-98-129.compute-1.amazonaws.com";
+  $user = "urcyphloccxygf";
+  $password = "16e062b8cc6601f501d1b62aee13c758540331c093d7074f424bc687b6bf5351";
+  $dbname = "d2kcc4it2iou00";
+  $port = "5432";
   
-   //Host: ec2-3-92-98-129.compute-1.amazonaws.com
+  try{
+    //Set DSN data source name
+      $dsn = "pgsql:host=" . $host . ";port=" . $port .";dbname=" . $dbname . ";user=" . $user . ";password=" . $password . ";";
+  
+  
+    //create a pdo instance
+    $pdo = new PDO($dsn, $user, $password);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
+    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  }
+  catch (PDOException $e) {
+  echo 'Connection failed: ' . $e->getMessage();
+  }
+ 
+  //Host: ec2-3-92-98-129.compute-1.amazonaws.com
   //Port: 5432
   //User: urcyphloccxygf
   //Password: 16e062b8cc6601f501d1b62aee13c758540331c093d7074f424bc687b6bf5351
@@ -17,14 +31,14 @@
 
    //$mysqli = new mysqli($servername, $username, $password, $dbname);
    
-   //if($mysqli -> connect_errno)
+   //if($db -> connect_errno)
    //{
-    //echo 'Failed to connect to MySQL: '.$mysqli -> connect_error;
-    //exit();
+   // echo 'Failed to connect to MySQL: '.$db -> connect_error;
+   // exit();
    //}
-   //else
+  // else
    //{
-    //echo '';
+   // echo '';
    //}
 
    //Create Table -- Commented out but verified that it was created.
@@ -70,13 +84,13 @@
     $sql = "INSERT INTO CUSTOMER (first)
     VALUES ('$fname')";
 
-    if($con->query($sql)==true)
+    if($pdo->query($sql)==true)
     {
       echo "Entry entered succesfully<br>";
     }
     else 
     {
-      echo 'Error entering entry'.$con->error.'<br>';
+      echo 'Error entering entry'.$pdo->error.'<br>';
     }
 
     //Assume anything after this is a legit uid/pass combo and grant login status
@@ -86,6 +100,6 @@
 
 
    //Close the connection to the MySQL server 
-    $con->close(); 
+    $pdo->close(); 
     
 ?>
