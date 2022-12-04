@@ -77,7 +77,7 @@
 
     //Store data into table
     $sql = "INSERT INTO CUSTOMER (first)
-    VALUES ('$fname)";
+    VALUES ('$fname')";
 
     if($con->query($sql)==true)
     {
