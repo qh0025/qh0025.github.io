@@ -7,17 +7,16 @@
   //$password = "password";
   // $dbname = "mydatabase";
 
-   $con = "d2kcc4it2iou00 host=ec2-3-92-98-129.compute-1.amazonaws.com port=5432 user=urcyphloccxygf password=16e062b8cc6601f501d1b62aee13c758540331c093d7074f424bc687b6bf5351 sslmode=require";
-  
-   if (!$con) 
-   {
-     echo "Database connection failed.";
-   }
-   else 
-   {
-     echo "Database connection success.";
-   }
-  
+
+   $dsn = "pgsql:"
+    . "host=ec2-3-92-98-129.compute-1.amazonaws.com;"
+    . "dbname=d2kcc4it2iou00;"
+    . "user=urcyphloccxygf;"
+    . "port=5432;"
+    . "sslmode=require;"
+    . "password=16e062b8cc6601f501d1b62aee13c758540331c093d7074f424bc687b6bf5351";
+
+  $con = new PDO($dsn);
   
    //Host: ec2-3-92-98-129.compute-1.amazonaws.com
   //Port: 5432
